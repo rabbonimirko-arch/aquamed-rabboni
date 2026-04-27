@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Mirko Rabboni | Consulente Aquamed</title>
+<title>Mirko Rabboni | Aquamed</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <style>
@@ -71,46 +71,45 @@ header{
 
 .meta a{color:#9eefff;text-decoration:none;font-weight:700}
 
-.hero{text-align:center;}
-
 .video-box{
   background:linear-gradient(135deg,var(--cyan),var(--pink));
   padding:2px;border-radius:20px;
+  position:relative;
 }
 
 .video-box video{
   width:100%;
   border-radius:18px;
+  display:block;
+  background:#000;
 }
 
-.video-controls button{
-  flex:1;padding:10px;border:none;
-  background:#111;color:#fff;font-size:12px;
-}
-
-.actions{
+/* overlay play */
+.play-overlay{
+  position:absolute;
+  inset:0;
   display:flex;
-  flex-wrap:wrap;
-  gap:8px;
+  align-items:center;
   justify-content:center;
+  font-size:40px;
+  background:rgba(0,0,0,.4);
+  border-radius:18px;
+  cursor:pointer;
 }
 
 .btn{
   display:inline-flex;
   align-items:center;
-  gap:6px;
-  padding:8px 14px;
+  justify-content:center;
+  padding:10px 14px;
   border-radius:999px;
   border:1px solid var(--line);
   background:rgba(2,6,23,.6);
   color:#fff;
   font-size:12px;
   text-decoration:none;
-}
-
-.dot{
-  width:9px;height:9px;border-radius:50%;
-  background:linear-gradient(135deg,var(--cyan),var(--pink));
+  cursor:pointer;
+  margin-top:10px;
 }
 
 .cta button{
@@ -121,13 +120,7 @@ header{
   background:linear-gradient(135deg,var(--pink),var(--cyan));
   color:#fff;
   font-weight:900;
-}
-
-footer{
-  margin-top:auto;
-  text-align:center;
-  font-size:10px;
-  color:#94a3b8;
+  margin-top:10px;
 }
 
 .ai-full{
@@ -166,77 +159,51 @@ footer{
     Email: <a href="mailto:rabboni.mirko@gmail.com">rabboni.mirko@gmail.com</a><br>
     Tel: <a href="tel:+393271514496">+39 3271514496</a>
   </div>
-
-  <div class="actions" style="margin-top:12px;">
-    <a class="btn" href="tel:+393271514496"><span class="dot"></span>Chiama</a>
-    <a class="btn" href="mailto:rabboni.mirko@gmail.com"><span class="dot"></span>Email</a>
-    <a class="btn" href="https://wa.me/393271514496" target="_blank"><span class="dot"></span>WhatsApp</a>
-    <button class="btn" onclick="saveContact()"><span class="dot"></span>Salva contatto</button>
-  </div>
 </section>
 
+<!-- VIDEO -->
 <section class="video-box">
-  <video id="introVideo" autoplay muted loop playsinline controls>
+  <video id="video" playsinline muted>
     <source src="aquamed-video.mp4" type="video/mp4">
   </video>
+
+  <div class="play-overlay" id="playBtn">▶</div>
 </section>
 
+<!-- CTA -->
 <section class="cta">
   <button onclick="openAI()">💬 Parla con il tuo consulente AI</button>
 </section>
 
-<!-- SOCIAL / LINK -->
-<section class="actions">
-  <a class="btn" href="https://www.aquamed.it" target="_blank">
-    <span class="dot"></span>Sito Aquamed
-  </a>
-
-  <a class="btn" href="https://www.instagram.com/aquameditalia/" target="_blank">
-    <span class="dot"></span>Instagram
-  </a>
-
-  <a class="btn" href="https://www.facebook.com/AquamedItalia" target="_blank">
-    <span class="dot"></span>Facebook
-  </a>
-
-  <a class="btn" href="https://www.linkedin.com" target="_blank">
-    <span class="dot"></span>LinkedIn
-  </a>
-</section>
-
-<footer>© <span id="year"></span> Aquamed</footer>
-
 </div>
 
+<!-- AI FULLSCREEN -->
 <div id="aiBox" class="ai-full">
   <button class="close" onclick="closeAI()">Chiudi</button>
   <iframe src="paginaai.html"></iframe>
 </div>
 
 <script>
-document.getElementById("year").textContent=new Date().getFullYear();
+const video = document.getElementById("video");
+const playBtn = document.getElementById("playBtn");
 
+/* TAP PER AVVIARE VIDEO */
+playBtn.addEventListener("click", () => {
+  video.muted = false;
+  video.play();
+  playBtn.style.display = "none";
+});
+
+/* APERTURA AI */
 function openAI(){
+  video.pause();
+  video.muted = true;
   document.getElementById("aiBox").classList.add("active");
 }
 
+/* CHIUSURA AI */
 function closeAI(){
   document.getElementById("aiBox").classList.remove("active");
-}
-
-function saveContact(){
-const v=`BEGIN:VCARD
-VERSION:3.0
-FN:RABBONI MIRKO
-TEL:+393271514496
-EMAIL:rabboni.mirko@gmail.com
-END:VCARD`;
-
-const blob=new Blob([v],{type:"text/vcard"});
-const link=document.createElement("a");
-link.href=URL.createObjectURL(blob);
-link.download="contatto.vcf";
-link.click();
 }
 </script>
 
