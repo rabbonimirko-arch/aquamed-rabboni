@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mirko Rabboni | Aquamed</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+
+body{
+  background:#061923;
+  color:white;
+}
+
+.app{
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+  position:relative;
+  background:
+    radial-gradient(circle at top right,rgba(0,217,255,.3),transparent),
+    radial-gradient(circle at bottom left,rgba(236,0,140,.25),transparent),
+    linear-gradient(180deg,#061923,#0b2f3d 50%,#061923);
+  overflow:hidden;
+}
+
+.app::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("hero.png") top center/90% no-repeat;
+  opacity:.35;
+}
+
+.app::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,transparent,rgba(6,25,35,.9));
+}
+
+.content{
+  position:relative;
+  z-index:2;
+  padding:20px;
+}
+
+.logo{
+  text-align:center;
+  font-size:42px;
+  font-weight:900;
+  background:linear-gradient(90deg,#00d9ff,#ec008c);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.payoff{
+  text-align:center;
+  color:#ec008c;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.title{
+  text-align:center;
+  margin-top:40px;
+}
+
+.title h1{
+  font-size:30px;
+}
+
+.title span{
+  color:#00d9ff;
+}
+
+.title p{
+  margin-top:10px;
+  color:#c8edf4;
+  font-size:15px;
+}
+
+.card{
+  margin-top:20px;
+  background:rgba(255,255,255,.08);
+  border-radius:25px;
+  padding:20px;
+  backdrop-filter:blur(15px);
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.name{
+  text-align:center;
+}
+
+.name h2{
+  font-size:24px;
+}
+
+.name p{
+  color:#00d9ff;
+  font-weight:bold;
+}
+
+.video-box{
+  margin:20px 0;
+  padding:3px;
+  border-radius:20px;
+  background:linear-gradient(90deg,#00d9ff,#ec008c);
+}
+
+.video-box video{
+  width:100%;
+  border-radius:18px;
+  display:block;
+}
+
+.buttons{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.btn{
+  padding:15px;
+  border-radius:50px;
+  font-weight:900;
+  border:none;
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+  display:block;
+  font-size:16px;
+}
+
+.ai{
+  background:linear-gradient(90deg,#ec008c,#00d9ff);
+  color:white;
+  animation:pulse 1.5s infinite;
+}
+
+.whatsapp{
+  background:#25D366;
+  color:white;
+}
+
+.call{
+  background:white;
+  color:black;
+}
+
+.save{
+  background:#073b4c;
+  color:white;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+  100%{transform:scale(1)}
+}
+
+.contacts{
+  text-align:center;
+  margin-top:15px;
+}
+
+.contacts a{
+  color:#00d9ff;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.ai-full{
+  position:fixed;
+  inset:0;
+  background:black;
+  display:none;
+  z-index:9999;
+}
+
+.ai-full.active{
+  display:block;
+}
+
+.ai-full iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+.close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:black;
+  color:white;
+  padding:10px 14px;
+  border-radius:30px;
+  border:1px solid white;
+  z-index:10000;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <div class="content">
+
+    <div class="logo">aquamed</div>
+    <div class="payoff">emozione pura</div>
+
+    <div class="title">
+      <h1>Il tuo <span>consulente</span></h1>
+      <p>Scopri Aquamed in modo innovativo e diretto</p>
+    </div>
+
+    <div class="card">
+
+      <div class="name">
+        <h2>RABBONI MIRKO</h2>
+        <p>Consulente Aquamed</p>
+      </div>
+
+      <div class="video-box">
+        <video autoplay muted loop playsinline controls>
+          <source src="aquamed-video.mp4" type="video/mp4">
+          Il tuo browser non supporta il video.
+        </video>
+      </div>
+
+      <div class="buttons">
+        <button class="btn ai" onclick="openAI()">Parla con il tuo consulente AI</button>
+
+        <a class="btn whatsapp"
+           href="https://wa.me/393271514496?text=Ciao%20Mirko%20voglio%20info%20Aquamed"
+           target="_blank">
+          WhatsApp
+        </a>
+
+        <a class="btn call" href="tel:+393271514496">Chiama ora</a>
+
+        <button class="btn save" onclick="saveContact()">Salva contatto</button>
+      </div>
+
+      <div class="contacts">
+        📞 <a href="tel:+393271514496">+39 3271514496</a><br>
+        ✉️ <a href="mailto:rabboni.mirko@gmail.com">rabboni.mirko@gmail.com</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="aiBox" class="ai-full">
+  <button class="close" onclick="closeAI()">Chiudi</button>
+  <iframe src="paginaai.html" allow="microphone; camera; autoplay; fullscreen"></iframe>
+</div>
+
+<script>
+function openAI(){
+  document.getElementById("aiBox").classList.add("active");
+}
+
+function closeAI(){
+  document.getElementById("aiBox").classList.remove("active");
+}
+
+function saveContact(){
+  const v=`BEGIN:VCARD
+VERSION:3.0
+N:Rabboni;Mirko;;;
+FN:RABBONI MIRKO
+ORG:Aquamed
+TITLE:Consulente Aquamed
+TEL;TYPE=CELL:+393271514496
+EMAIL;TYPE=INTERNET:rabboni.mirko@gmail.com
+URL:https://www.aquamed.it
+NOTE:Consulente Aquamed
+END:VCARD`;
+
+  const blob=new Blob([v],{type:"text/vcard;charset=utf-8"});
+  const link=document.createElement("a");
+  link.href=URL.createObjectURL(blob);
+  link.download="Mirko_Rabboni_Aquamed.vcf";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+</script>
+
+</body>
+</html>
